@@ -10,6 +10,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         public float maxPitchAngle = 80;
         public Animator elerons;
         public Animator ruli;
+        public Animator gears;
 
         [SerializeField] private float m_MaxEnginePower = 40f;
         [SerializeField] private float m_Lift = 0.002f;
@@ -48,6 +49,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 
         private void Start()
         {
+
             m_Rigidbody = GetComponent<Rigidbody>();
             m_OriginalDrag = m_Rigidbody.drag;
             m_OriginalAngularDrag = m_Rigidbody.angularDrag;
@@ -62,6 +64,22 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 
         private void FixedUpdate()
         {
+            if (gameObject.transform.position.y < 44f)
+            {
+                gears.SetBool("idle", false);
+            }
+            else
+            {
+                gears.SetBool("idle", true);
+                if (gameObject.transform.position.y > 60f)
+                {
+                    gears.SetBool("open", false);
+                }
+                if (gameObject.transform.position.y > 45f & gameObject.transform.position.y < 55f)
+                {
+                    gears.SetBool("open", true);
+                }
+            }
             float roll = Input.GetAxis("Horizontal");
             if (roll > 0)
             {
