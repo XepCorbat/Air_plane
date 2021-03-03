@@ -11,17 +11,21 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         public Animator elerons;
         public Animator ruli;
         public Animator gears;
+        public Animator rudder;
+        public Animator flaps;
 
         [SerializeField] private float m_MaxEnginePower = 40f;
         [SerializeField] private float m_Lift = 0.002f;
         [SerializeField] private float m_ZeroLiftSpeed = 300;
         [SerializeField] private float m_RollEffect = 1f;
+        [SerializeField] private float m_QEEffect = 1f;
         [SerializeField] private float m_PitchEffect = 1f;
         [SerializeField] private float m_YawEffect = 0.2f;
         [SerializeField] private float m_BankedTurnEffect = 0.5f;
         [SerializeField] private float m_AerodynamicEffect = 0.02f;
         [SerializeField] private float m_AutoTurnPitch = 0.5f;
         [SerializeField] private float m_AutoRollLevel = 0.2f;
+        [SerializeField] private float m_AutoQELevel = 0.2f;
         [SerializeField] private float m_AutoPitchLevel = 0.2f;
         [SerializeField] private float m_AirBrakesEffect = 3f;
         [SerializeField] private float m_ThrottleChangeSpeed = 0.3f;
@@ -34,8 +38,10 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         public float EnginePower { get; private set; }
         public float MaxEnginePower { get { return m_MaxEnginePower; } }
         public float RollAngle { get; private set; }
+        public float QEAngle { get; private set; }
         public float PitchAngle { get; private set; }
         public float RollInput { get; private set; }
+        public float QEInput { get; private set; }
         public float PitchInput { get; private set; }
         public float YawInput { get; private set; }
         public float ThrottleInput { get; private set; }
@@ -124,14 +130,45 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                 ruli.SetBool("up", false);
                 ruli.SetBool("down", false);
             }
-            bool airBrakes = Input.GetButton("Fire1");
+            float QE = Input.GetAxis("Fire3");
+            if (QE < 0)
+            {
+                if (rudder.GetBool("left"))
+                {
+                    rudder.SetBool("left", false);
+                }
+                rudder.SetBool("right", true);
+            }
+            else if (QE > 0)
+            {
+                if (rudder.GetBool("right"))
+                {
+                    rudder.SetBool("right", false);
+                }
+                rudder.SetBool("left", true);
+            }
+            else
+            {
+                rudder.SetBool("right", false);
+                rudder.SetBool("left", false);
+            }
+            bool airBrakes = Input.GetButton("Fire1");  
+            if(airBrakes)
+            {
+                flaps.SetBool("flaps", true);
+            }
+            else
+            {
+                flaps.SetBool("flaps",false);
+            }
             float throttle = airBrakes ? -1 : 1;
-            Move(roll, pitch, 0, throttle, airBrakes);
+            Move(roll, pitch, 0, throttle, airBrakes, QE);
         }
 
-        void Move(float rollInput, float pitchInput, float yawInput, float throttleInput, bool airBrakes)
+        void Move(float rollInput, float pitchInput, float yawInput, float throttleInput, bool airBrakes, float QE)
         {
             RollInput = rollInput;
+            QEInput = QE;
             PitchInput = pitchInput;
             YawInput = yawInput;
             ThrottleInput = throttleInput;
@@ -151,6 +188,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         void ClampInputs()
         {
             RollInput = Mathf.Clamp(RollInput, -1, 1);
+            QEInput = Mathf.Clamp(QEInput, -1, 1);
             PitchInput = Mathf.Clamp(PitchInput, -1, 1);
             YawInput = Mathf.Clamp(YawInput, -1, 1);
             ThrottleInput = Mathf.Clamp(ThrottleInput, -1, 1);
@@ -168,6 +206,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                 var flatRight = Vector3.Cross(Vector3.up, flatForward);
                 var localFlatRight = transform.InverseTransformDirection(flatRight);
                 RollAngle = Mathf.Atan2(localFlatRight.y, localFlatRight.x);
+               ////////////// QEAngle = Mathf.Atan2(localFlatRight.y, localFlatRight.x);
             }
         }
 
@@ -183,6 +222,11 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                 PitchInput = -PitchAngle * m_AutoPitchLevel;
                 PitchInput -= Mathf.Abs(m_BankedTurnAmount * m_BankedTurnAmount * m_AutoTurnPitch);
             }
+            if(QEInput == 0f)
+            {
+                QEInput = -QEAngle * m_AutoQELevel;
+            }
+           
         }
 
         void CalculateForwardSpeed()
@@ -236,15 +280,9 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             torque += PitchInput * m_PitchEffect * transform.right;
             torque += YawInput * m_YawEffect * transform.up;
             torque += -RollInput * m_RollEffect * transform.forward;
+            torque += -QEInput * m_QEEffect * transform.up;
             torque += m_BankedTurnAmount * m_BankedTurnEffect * transform.up;
             m_Rigidbody.AddTorque(torque * ForwardSpeed * m_AeroFactor);
-        }
-
-        //void CalculateAltitude()
-        //{
-        //    var ray = new Ray(transform.position - Vector3.up * 10, -Vector3.up);
-        //    RaycastHit hit;
-        //    Altitude = Physics.Raycast(ray, out hit) ? hit.distance + 10 : transform.position.y;
-        //}
+        }     
     }
 }
