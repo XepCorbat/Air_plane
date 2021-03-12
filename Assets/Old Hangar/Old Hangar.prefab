@@ -14,8 +14,8 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 0
 --- !u!4 &4928341380924672
 Transform:
   m_ObjectHideFlags: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028841335964046}
   m_LocalRotation: {x: 0.7071068, y: -4.32978e-17, z: -0.7071067, w: -4.3297806e-17}
-  m_LocalPosition: {x: -0.000000068482265, y: 0.08617961, z: 0.574726}
+  m_LocalPosition: {x: -0, y: 0.322, z: 0.575}
   m_LocalScale: {x: 0.99999994, y: 0.9999998, z: 0.99999994}
   m_Children:
   - {fileID: 4898167187003672}
@@ -41,12 +41,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4329712457858354}
   - component: {fileID: 111043567521628794}
+  - component: {fileID: 2017774182}
   m_Layer: 0
   m_Name: Old Hangar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4329712457858354
 Transform:
@@ -57,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 1109768394089260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.49, y: -13.16, z: -15.29}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.471, y: 4.471, z: 4.471}
   m_Children:
   - {fileID: 4937239493256068}
   - {fileID: 4602703312490326}
@@ -71,7 +72,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109768394089260}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 6ab693db99e1c8a48939c522d49a62ba, type: 3}
   m_Animations:
@@ -80,6 +81,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!65 &2017774182
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109768394089260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 29.838337, y: 1.1966698, z: 28.110441}
+  m_Center: {x: 4.7365775, y: 15.456296, z: 15.256055}
 --- !u!1 &1277791706596166
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +109,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4602703312490326
 Transform:
@@ -105,7 +119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277791706596166}
   m_LocalRotation: {x: -0.7071067, y: 0.00000013090927, z: 0.00000002413911, w: 0.7071068}
-  m_LocalPosition: {x: -2.269261, y: 15.79106, z: 29.118107}
+  m_LocalPosition: {x: -2.269261, y: 15.8, z: 115.6}
   m_LocalScale: {x: 14.658041, y: 14.658042, z: 14.658041}
   m_Children: []
   m_Father: {fileID: 4329712457858354}
@@ -186,7 +200,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4599227868460324
 Transform:
@@ -196,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1631829766523938}
   m_LocalRotation: {x: -0.7071068, y: 0.00000004214686, z: -0.00000004214685, w: 0.7071067}
-  m_LocalPosition: {x: 1.1677506e-11, y: -0.5721866, z: -0.07413276}
+  m_LocalPosition: {x: 1.1677506e-11, y: -0.572, z: -0.263}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4928341380924672}
@@ -217,7 +231,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4898167187003672
 Transform:
@@ -248,7 +262,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4937239493256068
 Transform:
@@ -279,7 +293,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4114864466926424
 Transform:
