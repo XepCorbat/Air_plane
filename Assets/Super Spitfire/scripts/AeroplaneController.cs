@@ -13,6 +13,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         public Animator gears;
         public Animator rudder;
         public Animator flaps;
+        public Animator propeller;
 
         [SerializeField] private float m_MaxEnginePower = 40f;
         [SerializeField] private float m_Lift = 0.002f;
@@ -163,6 +164,30 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             }
             float throttle = airBrakes ? -1 : 1;
             Move(roll, pitch, 0, throttle, airBrakes, QE);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (m_MaxEnginePower == 20000f)
+                    m_MaxEnginePower = 5000f;
+                else if (m_MaxEnginePower == 5000f)
+                    m_MaxEnginePower = 20000f;
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (m_MaxEnginePower == 20000f || m_MaxEnginePower == 5000f)
+                {
+                    m_MaxEnginePower = 0f;
+                    m_AirBrakesEffect = 100f;
+                    propeller.enabled = false;
+                }
+                else
+                {
+                    m_MaxEnginePower = 20000f;
+                    m_AirBrakesEffect = 10f;
+                    propeller.enabled = true;
+                }
+            }
+            
         }
 
         void Move(float rollInput, float pitchInput, float yawInput, float throttleInput, bool airBrakes, float QE)
@@ -205,8 +230,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                 PitchAngle = Mathf.Atan2(localFlatForward.y, localFlatForward.z);
                 var flatRight = Vector3.Cross(Vector3.up, flatForward);
                 var localFlatRight = transform.InverseTransformDirection(flatRight);
-                RollAngle = Mathf.Atan2(localFlatRight.y, localFlatRight.x);
-               ////////////// QEAngle = Mathf.Atan2(localFlatRight.y, localFlatRight.x);
+                RollAngle = Mathf.Atan2(localFlatRight.y, localFlatRight.x);             
             }
         }
 
