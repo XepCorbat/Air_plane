@@ -14,6 +14,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         public Animator rudder;
         public Animator flaps;
         public Animator propeller;
+        
 
         [SerializeField] private float m_MaxEnginePower = 40f;
         [SerializeField] private float m_Lift = 0.002f;
@@ -185,9 +186,17 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                     m_MaxEnginePower = 20000f;
                     m_AirBrakesEffect = 10f;
                     propeller.enabled = true;
-                }
+                }           
             }
-            
+            float mw = Input.GetAxis("Mouse ScrollWheel");
+            if (mw<0)
+            {
+                m_MaxEnginePower -= 500f;
+            }
+            if(mw>0)
+            {
+                m_MaxEnginePower += 500f;
+            }
         }
 
         void Move(float rollInput, float pitchInput, float yawInput, float throttleInput, bool airBrakes, float QE)
