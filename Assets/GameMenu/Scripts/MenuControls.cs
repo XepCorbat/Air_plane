@@ -10,10 +10,10 @@ public class MenuControls : MonoBehaviour
         SceneManager.LoadScene("WinterMap");
     }
 
-    public void ExitPressed()
+    public void BackPressed()
     {
         Application.Quit();
-        Debug.Log("Exit pressed!");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void SummerMapPressed()
