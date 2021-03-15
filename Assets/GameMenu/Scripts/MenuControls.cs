@@ -27,4 +27,9 @@ public class MenuControls : MonoBehaviour
         SceneManager.LoadScene("WinterMap");
         Debug.Log("Winter map loaded!");
     }
+
+    public void time()
+    {
+        Time.timeScale = 1f;
+    }
 }
