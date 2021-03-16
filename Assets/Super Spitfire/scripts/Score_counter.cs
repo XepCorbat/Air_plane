@@ -6,14 +6,17 @@ using UnityEngine.UI;
 public class Score_counter : MonoBehaviour
 {
     public Text ScoreText;
+    public Text TextEnd;
     int Score = 0;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "circle")
         {
             Score++;
-            ScoreText.text = Score.ToString();
+            ScoreText.text = "Score " + Score.ToString();
+            TextEnd.text = "You result " + Score.ToString();
             Destroy(other.gameObject);
+            
         }
     }
 }
