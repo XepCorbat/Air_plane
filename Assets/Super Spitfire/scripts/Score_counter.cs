@@ -15,8 +15,19 @@ public class Score_counter : MonoBehaviour
             Score++;
             ScoreText.text = "Score " + Score.ToString();
             TextEnd.text = "Your result " + Score.ToString();
-            Destroy(other.gameObject);
-            
+            if(PlayerPrefs.HasKey("save_score"))
+            {
+                int saveScore = PlayerPrefs.GetInt("save_score");
+                if(saveScore < Score)
+                {
+                    PlayerPrefs.SetInt("save_score", Score);
+                }
+            }
+            else
+            {
+                PlayerPrefs.SetInt("save_score", Score);
+            }
+            Destroy(other.gameObject);            
         }
 
     }
