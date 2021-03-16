@@ -7,7 +7,7 @@ public class ESCcontrol : MonoBehaviour
 {
     public GameObject ButtonPlay;
     public GameObject ButtonBack;
-    
+    public Animator proppeler;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))        
@@ -16,13 +16,15 @@ public class ESCcontrol : MonoBehaviour
             {
                 Time.timeScale = 0f;
                 ButtonPlay.SetActive(true);
-                ButtonBack.SetActive(true);               
-            }       
+                ButtonBack.SetActive(true);
+                AudioListener.pause = true;
+            }
             else
             {
                 Time.timeScale = 1f;
                 ButtonPlay.SetActive(false);
-                ButtonBack.SetActive(false);                                           
+                ButtonBack.SetActive(false);
+                AudioListener.pause = false;
             }
         }
     }

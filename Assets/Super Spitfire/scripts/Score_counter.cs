@@ -14,9 +14,10 @@ public class Score_counter : MonoBehaviour
         {
             Score++;
             ScoreText.text = "Score " + Score.ToString();
-            TextEnd.text = "You result " + Score.ToString();
+            TextEnd.text = "Your result " + Score.ToString();
             Destroy(other.gameObject);
             
         }
+
     }
 }
