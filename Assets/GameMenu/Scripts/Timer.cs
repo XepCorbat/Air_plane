@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     public GameObject EndGamePanel;
     public bool play = false;
     public Text TimerText;
+    public Image endGameImage;
     void Update()
     {
         if (play)
@@ -24,6 +25,7 @@ public class Timer : MonoBehaviour
             else
             {
                 EndGamePanel.SetActive(true);
+                endGameImage.enabled = true;
                 AudioListener.pause = true;
                 Time.timeScale = 0f;
             }
