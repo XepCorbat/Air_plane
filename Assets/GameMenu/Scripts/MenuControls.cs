@@ -5,15 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MenuControls : MonoBehaviour
 {
-    public void PlayPressed()
-    {
-        SceneManager.LoadScene("WinterMap");
-    }
-
+    
     public void BackPressed()
     {
-        Application.Quit();
         SceneManager.LoadScene("MainMenu");
+        Debug.Log("Summer map loaded!");
+    }
+
+    public void ExitPressed()
+    {
+        Application.Quit();
+        Debug.Log("Exit pressed");
     }
 
     public void SummerMapPressed()
