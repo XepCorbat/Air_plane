@@ -57,7 +57,8 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 
         private void Start()
         {
-
+                    
+            Application.targetFrameRate = 60;         
             m_Rigidbody = GetComponent<Rigidbody>();
             m_OriginalDrag = m_Rigidbody.drag;
             m_OriginalAngularDrag = m_Rigidbody.angularDrag;
