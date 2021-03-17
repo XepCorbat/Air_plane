@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5941665785176803367}
   - component: {fileID: 5941665785176803366}
   - component: {fileID: 5941665785176803365}
+  - component: {fileID: 4445966659764143472}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: circle
@@ -96,3 +97,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4445966659764143472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5941665785176803364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa229c1ad32631b4fb303d00c71f084c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextRing: {fileID: 0}
