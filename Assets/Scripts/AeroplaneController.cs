@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Vehicles.Aeroplane
 {
@@ -14,7 +15,10 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         public Animator rudder;
         public Animator flaps;
         public Animator propeller;
-        
+        public Text power;
+        public Text speed;
+
+
 
         [SerializeField] private float m_MaxEnginePower = 40f;
         [SerializeField] private float m_Lift = 0.002f;
@@ -198,6 +202,11 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             {
                 m_MaxEnginePower += 500f;
             }
+            power.text = "Power " + m_MaxEnginePower.ToString();
+            speed.text = "Speed " + System.Convert.ToInt32(ForwardSpeed).ToString();
+
+
+
         }
 
         void Move(float rollInput, float pitchInput, float yawInput, float throttleInput, bool airBrakes, float QE)
