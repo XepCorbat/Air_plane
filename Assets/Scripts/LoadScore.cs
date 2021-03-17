@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class LoadScore : MonoBehaviour
 {
-
+    public string key;
     void Start()
     {
-        if (PlayerPrefs.HasKey("save_score"))
+        if (PlayerPrefs.HasKey(key))
         {
-            gameObject.GetComponent<Text>().text += " " + PlayerPrefs.GetInt("save_score").ToString();
+            gameObject.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(key).ToString();
         }
         else
         {

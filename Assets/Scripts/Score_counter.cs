@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Score_counter : MonoBehaviour
 {
@@ -15,17 +16,37 @@ public class Score_counter : MonoBehaviour
             Score++;
             ScoreText.text = "Score " + Score.ToString();
             TextEnd.text = "Your result " + Score.ToString();
-            if(PlayerPrefs.HasKey("save_score"))
+            Debug.Log(SceneManager.GetActiveScene().name);
+            string Scene = SceneManager.GetActiveScene().name;
+            if(Scene == "WinterMap")
             {
-                int saveScore = PlayerPrefs.GetInt("save_score");
-                if(saveScore < Score)
+                if (PlayerPrefs.HasKey("save_score"))
+                {
+                    int saveScore = PlayerPrefs.GetInt("save_score");
+                    if (saveScore < Score)
+                    {
+                        PlayerPrefs.SetInt("save_score", Score);
+                    }
+                }
+                else
                 {
                     PlayerPrefs.SetInt("save_score", Score);
                 }
             }
-            else
+            else if (Scene == "SummerMap")
             {
-                PlayerPrefs.SetInt("save_score", Score);
+                if (PlayerPrefs.HasKey("save_score_summer"))
+                {
+                    int saveScore = PlayerPrefs.GetInt("save_score_summer");
+                    if (saveScore < Score)
+                    {
+                        PlayerPrefs.SetInt("save_score_summer", Score);
+                    }
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("save_score_summer", Score);
+                }
             }
             Destroy(other.gameObject);            
         }

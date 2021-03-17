@@ -17,8 +17,7 @@ public class Timer : MonoBehaviour
         {
             if (timer > 0f)
             {
-                timer -= Time.deltaTime;
-                Debug.Log(timer);
+                timer -= Time.deltaTime;               
                 AudioListener.pause = false;        
                 TimerText.text = "Time " + System.Convert.ToInt32(timer).ToString(); 
             }
