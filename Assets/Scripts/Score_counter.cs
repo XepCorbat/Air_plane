@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+//вывод и сохранение счета
 public class Score_counter : MonoBehaviour
 {
     public Text ScoreText;

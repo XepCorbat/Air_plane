@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+//меню паузы и подлючение пропейлера)
 public class ESCcontrol : MonoBehaviour
 {
     public GameObject ButtonPlay;

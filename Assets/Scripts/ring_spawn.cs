@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//спавн колец
 public class ring_spawn : MonoBehaviour
 {
     public GameObject nextRing;

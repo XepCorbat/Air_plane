@@ -5,6 +5,7 @@ using UnityEngine.UI;
 namespace UnityStandardAssets.Vehicles.Aeroplane
 {
     [RequireComponent(typeof(Rigidbody))]
+    //объ€вление переменных, подключение аниматоров, вывод переменных в инспектор 
     public class AeroplaneController : MonoBehaviour
     {
         public float maxRollAngle = 80;
@@ -37,7 +38,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         [SerializeField] private float m_ThrottleChangeSpeed = 0.3f;
         [SerializeField] private float m_DragIncreaseFactor = 0.001f;
 
-        //public float Altitude { get; private set; }
+       
         public float Throttle { get; private set; }
         public bool AirBrakes { get; private set; }
         public float ForwardSpeed { get; private set; }
@@ -74,7 +75,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                 }
             }
         }
-
+        // подключение анимаций движимых частей самолета, регулировка мощности двигател€
         private void FixedUpdate()
         {
             if (gameObject.transform.position.y < 44f)
@@ -208,7 +209,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 
 
         }
-
+        //вызов функций оттвечающих за физик. управление
         void Move(float rollInput, float pitchInput, float yawInput, float throttleInput, bool airBrakes, float QE)
         {
             RollInput = rollInput;
@@ -225,8 +226,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             CalculateDrag();
             CaluclateAerodynamicEffect();
             CalculateLinearForces();
-            CalculateTorque();
-            //CalculateAltitude();
+            CalculateTorque();          
         }
 
         void ClampInputs()
@@ -237,7 +237,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             YawInput = Mathf.Clamp(YawInput, -1, 1);
             ThrottleInput = Mathf.Clamp(ThrottleInput, -1, 1);
         }
-
+        //вычисление наклонов и поворотов
         void CalculateRollAndPitchAngles()
         {
             var flatForward = transform.forward;
@@ -252,7 +252,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                 RollAngle = Mathf.Atan2(localFlatRight.y, localFlatRight.x);             
             }
         }
-
+        //вычисление наклонов и поворотов
         void AutoLevel()
         {
             m_BankedTurnAmount = Mathf.Sin(RollAngle);
@@ -271,26 +271,26 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             }
            
         }
-
+        //вычесление скорости
         void CalculateForwardSpeed()
         {
             var localVelocity = transform.InverseTransformDirection(m_Rigidbody.velocity);
             ForwardSpeed = Mathf.Max(0, localVelocity.z);
         }
-
+        //вычисление скорости
         void ControlThrottle()
         {
             Throttle = Mathf.Clamp01(Throttle + ThrottleInput * Time.deltaTime * m_ThrottleChangeSpeed);
             EnginePower = Throttle * m_MaxEnginePower;
         }
-
+        //вычисление сопротивлени€
         void CalculateDrag()
         {
             float extraDrag = m_Rigidbody.velocity.magnitude * m_DragIncreaseFactor;
             m_Rigidbody.drag = (AirBrakes ? (m_OriginalDrag + extraDrag) * m_AirBrakesEffect : m_OriginalDrag + extraDrag);
             m_Rigidbody.angularDrag = m_OriginalAngularDrag * ForwardSpeed;
         }
-
+        //вычисление аэродинамики
         void CaluclateAerodynamicEffect()
         {
             if (m_Rigidbody.velocity.magnitude > 0)
@@ -305,7 +305,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                                                       m_AerodynamicEffect * Time.deltaTime);
             }
         }
-
+        //вычисление линейной силы
         void CalculateLinearForces()
         {
             var forces = Vector3.zero;
@@ -316,7 +316,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             forces += liftPower * liftDirection;
             m_Rigidbody.AddForce(forces);
         }
-
+        //вычисление момента кручени€
         void CalculateTorque()
         {
             var torque = Vector3.zero;

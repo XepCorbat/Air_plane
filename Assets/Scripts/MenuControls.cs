@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+//меню игры и переход между сценами
 public class MenuControls : MonoBehaviour
 {
     

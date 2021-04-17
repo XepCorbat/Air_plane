@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+//таймер и окончание игры
 public class Timer : MonoBehaviour
 {
     public float timer = 20f;

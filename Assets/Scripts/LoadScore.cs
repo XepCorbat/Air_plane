@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//загрузка счета
 public class LoadScore : MonoBehaviour
 {
     public string key;
