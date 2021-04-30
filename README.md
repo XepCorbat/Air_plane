@@ -11,7 +11,7 @@ https://github.com/XepCorbat/Air_plane/releases/tag/1.1
 ### Состав команды:
 Рубцов Роман Алексеевич ИКБО-24-19
 
-Сафонов Алексей Викторович ИВБО-04-19
+Белкин Григорий Флексадрович ИКБО-24-19
 
 ### Инструкция:
 |Инструмент|Версия|
@@ -21,9 +21,8 @@ https://github.com/XepCorbat/Air_plane/releases/tag/1.1
 |OC|Windows 10x64|
 
 ### Скриншот:
-![](images/1.png)
 
 ### Видео:
 https://youtu.be/YyPM-CylhAE
 
-
+Для запуска проекта используется .exe файл 

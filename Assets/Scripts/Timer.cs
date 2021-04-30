@@ -3,7 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-//таймер и окончание игры
+/*!
+ таймер и окончание игры:
+
+        public class Timer : MonoBehaviour
+        {
+            public float timer = 20f;
+            public GameObject EndGamePanel;
+            public bool play = false;
+            public Text TimerText;
+            public Image endGameImage;
+            void Update()
+            {
+                if (play)
+                {
+                    if (timer > 0f)
+                    {
+                        timer -= Time.deltaTime;               
+                        AudioListener.pause = false;        
+                        TimerText.text = "Time " + System.Convert.ToInt32(timer).ToString(); 
+                    }
+                    else
+                    {
+                        EndGamePanel.SetActive(true);
+                        endGameImage.enabled = true;
+                        AudioListener.pause = true;
+                        Time.timeScale = 0f;
+                    }
+                }
+            }
+            public void playButton()
+            {
+                play = true;
+            }
+        }
+
+ */
 public class Timer : MonoBehaviour
 {
     public float timer = 20f;

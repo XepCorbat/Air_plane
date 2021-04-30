@@ -5,7 +5,29 @@ using UnityEngine.UI;
 namespace UnityStandardAssets.Vehicles.Aeroplane
 {
     [RequireComponent(typeof(Rigidbody))]
-    //объявление переменных, подключение аниматоров, вывод переменных в инспектор 
+    /*!
+    Данный скрипт отвечает за объявление переменных, подключение аниматоров, вывод переменных в инспектор, управление и физику:
+
+       -подключение анимаций движимых частей самолета, регулировка мощности двигателя - private void FixedUpdate()
+
+       -физическое упраление - void Move(float rollInput, float pitchInput, float yawInput, float throttleInput, bool airBrakes, float QE)
+
+       -вычисление наклонов и поворотов - void CalculateRollAndPitchAngles()
+
+       -вычесление скорости -  void CalculateForwardSpeed()
+
+       -управление дросселем - void ControlThrottle()
+
+       -вычисление сопротивления - void CalculateDrag()
+
+       -вычисление аэродинамики -  void CaluclateAerodynamicEffect()
+
+       -вычисление линейной силы - void CalculateLinearForces()
+
+       -вычисление момента кручения - void CalculateTorque()
+
+        ссылка на скрипт https://github.com/XepCorbat/Airplane/blob/main/Assets/Scripts/AeroplaneController.cs
+    */
     public class AeroplaneController : MonoBehaviour
     {
         public float maxRollAngle = 80;
@@ -75,7 +97,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                 }
             }
         }
-        // подключение анимаций движимых частей самолета, регулировка мощности двигателя
+      
         private void FixedUpdate()
         {
             if (gameObject.transform.position.y < 44f)
@@ -209,7 +231,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 
 
         }
-        //вызов функций оттвечающих за физик. управление
+    
         void Move(float rollInput, float pitchInput, float yawInput, float throttleInput, bool airBrakes, float QE)
         {
             RollInput = rollInput;
@@ -237,7 +259,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             YawInput = Mathf.Clamp(YawInput, -1, 1);
             ThrottleInput = Mathf.Clamp(ThrottleInput, -1, 1);
         }
-        //вычисление наклонов и поворотов
+    
         void CalculateRollAndPitchAngles()
         {
             var flatForward = transform.forward;
@@ -252,7 +274,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                 RollAngle = Mathf.Atan2(localFlatRight.y, localFlatRight.x);             
             }
         }
-        //вычисление наклонов и поворотов
+      
         void AutoLevel()
         {
             m_BankedTurnAmount = Mathf.Sin(RollAngle);
@@ -271,26 +293,26 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             }
            
         }
-        //вычесление скорости
+   
         void CalculateForwardSpeed()
         {
             var localVelocity = transform.InverseTransformDirection(m_Rigidbody.velocity);
             ForwardSpeed = Mathf.Max(0, localVelocity.z);
         }
-        //вычисление скорости
+      
         void ControlThrottle()
         {
             Throttle = Mathf.Clamp01(Throttle + ThrottleInput * Time.deltaTime * m_ThrottleChangeSpeed);
             EnginePower = Throttle * m_MaxEnginePower;
         }
-        //вычисление сопротивления
+        
         void CalculateDrag()
         {
             float extraDrag = m_Rigidbody.velocity.magnitude * m_DragIncreaseFactor;
             m_Rigidbody.drag = (AirBrakes ? (m_OriginalDrag + extraDrag) * m_AirBrakesEffect : m_OriginalDrag + extraDrag);
             m_Rigidbody.angularDrag = m_OriginalAngularDrag * ForwardSpeed;
         }
-        //вычисление аэродинамики
+     
         void CaluclateAerodynamicEffect()
         {
             if (m_Rigidbody.velocity.magnitude > 0)
@@ -305,7 +327,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                                                       m_AerodynamicEffect * Time.deltaTime);
             }
         }
-        //вычисление линейной силы
+     
         void CalculateLinearForces()
         {
             var forces = Vector3.zero;
@@ -316,7 +338,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             forces += liftPower * liftDirection;
             m_Rigidbody.AddForce(forces);
         }
-        //вычисление момента кручения
+       
         void CalculateTorque()
         {
             var torque = Vector3.zero;
